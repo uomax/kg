@@ -1,21 +1,172 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Toggle Switch</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="别找了，直接问！需要什么，我们帮你搞定！">
+    <meta name="keywords" content="acexxx - 你提需求，我们来完成">
+    <meta name="author" content="Acexxx">
+    
+    <meta property="og:title" content="acexxx - 你提需求，我们来完成">
+    <meta property="og:description" content="别找了，直接问！需要什么，我们帮你搞定！">
+    <meta property="og:image" content="https://yourdomain.com/logo.webp">
+    <meta property="og:url" content="https://yourdomain.com">
+    <meta property="og:type" content="website">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="acexxx - 你提需求，我们来完成">
+    <meta name="twitter:description" content="别找了，直接问！需要什么，我们帮你搞定！">
+    <meta name="twitter:image" content="https://yourdomain.com/logo.webp">
+    <title>acexxx - 你提需求，我们来完成。</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="icon" type="image/webp" href="logo.webp">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            color: white;
+            overflow: hidden;
+            background-color: #000; /* 设置黑色背景 */
+        }
+
+        .background-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .cyberpunk-lines {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(0deg, rgba(255,0,0,0.1) 0%, rgba(0,0,255,0.1) 100%);
+            animation: moveLines 10s linear infinite; /* 赛博朋克动态效果 */
+        }
+
+        @keyframes moveLines {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-100%); }
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 10;
+            width: 120px;
+            height: 60px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            pointer-events: none;
+        }
+
+        .text-container {
+            position: absolute;
+            bottom: 10%;
+            left: 25%;
+            z-index: 10;
+            text-align: left;
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+            animation: fadeIn 2s ease-in;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+        }
+
+        .text-container h1 {
+            font-weight: normal;
+            font-size: 24px;
+            margin-bottom: 25px;
+        }
+
+        .text-container p {
+            font-size: 40px;
+            line-height: 1.5;
+            margin-bottom: 50px;
+        }
+
+        .text-container p span {
+            display: block;
+            margin-top: 20px;
+            font-size: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                width: 80px;
+                height: 40px;
+                top: 10px;
+                left: 10px;
+            }
+            .text-container {
+                left: 10%;
+                bottom: 5%;
+            }
+            .text-container h1 {
+                font-size: 18px;
+            }
+            .text-container p {
+                font-size: 24px;
+            }
+            .text-container p span {
+                font-size: 20px;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
 </head>
 <body>
-    <div class="toggle-switch">
-        <input type="checkbox" id="switch" />
-        <label for="switch">
-            <span class="toggle-slider"></span>
-            <span class="label-celsius">°C</span>
-            <span class="label-fahrenheit">°F</span>
-        </label>
+    <div class="background-effect">
+        <div class="cyberpunk-lines"></div>
+    </div>
+    <div class="overlay"></div>
+    <div class="logo" id="logo-element"></div>
+    <div class="text-container">
+        <h1>你 好，世 界 。</h1>
+        <p>
+            <strong>别找了，直接问！需要什么，我们帮你搞定！</strong>
+            <span>QQ: 911716707        Telegram: @acexxxcc </span>
+        </p>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener("contextmenu", function(event) {
+            event.preventDefault();
+        });
+
+        const resources = {
+            logo: "data:image/webp;base64," + btoa("logo.webp")
+        };
+
+        const logo = document.getElementById("logo-element");
+        logo.style.backgroundImage = `url(${atob(resources.logo.split(",")[1])})`;
+    </script>
 </body>
 </html>
