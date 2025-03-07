@@ -20,8 +20,8 @@
     <title>acexxx - 你提需求，我们来完成。</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    
     <link rel="icon" type="image/webp" href="logo.webp">
+    
     <style>
         * {
             margin: 0;
@@ -33,7 +33,7 @@
             font-family: 'Roboto', Arial, sans-serif;
             color: white;
             overflow: hidden;
-            background-color: #000; /* 设置黑色背景 */
+            background-color: #000; /* 黑色背景作为基础 */
         }
 
         .background-effect {
@@ -46,17 +46,11 @@
             overflow: hidden;
         }
 
-        .cyberpunk-lines {
+        #particles-js {
             position: absolute;
             width: 100%;
             height: 100%;
-            background: linear-gradient(0deg, rgba(255,0,0,0.1) 0%, rgba(0,0,255,0.1) 100%);
-            animation: moveLines 10s linear infinite; /* 赛博朋克动态效果 */
-        }
-
-        @keyframes moveLines {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-100%); }
+            background-color: #000;
         }
 
         .overlay {
@@ -65,7 +59,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.3); /* 轻微透明度，增强层次感 */
             z-index: 1;
         }
 
@@ -93,7 +87,7 @@
             -ms-user-select: text;
             user-select: text;
             animation: fadeIn 2s ease-in;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* 文字阴影增强可读性 */
         }
 
         .text-container h1 {
@@ -144,7 +138,7 @@
 </head>
 <body>
     <div class="background-effect">
-        <div class="cyberpunk-lines"></div>
+        <div id="particles-js"></div>
     </div>
     <div class="overlay"></div>
     <div class="logo" id="logo-element"></div>
@@ -156,17 +150,35 @@
         </p>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: ['#ff0000', '#0000ff', '#00ff00'] }, // 霓虹色：红、蓝、绿
+                shape: { type: 'circle', stroke: { width: 0, color: '#000000' } },
+                opacity: { value: 0.8, random: true },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: '#ffffff', opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 2, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: { onhover: { enable: false }, onclick: { enable: false }, resize: true }
+            },
+            retina_detect: true
+        });
+
         document.addEventListener("contextmenu", function(event) {
             event.preventDefault();
         });
 
         const resources = {
-            logo: "data:image/webp;base64," + btoa("logo.webp")
+            logo: "logo.webp" /* 请替换为实际的logo路径 */
         };
 
         const logo = document.getElementById("logo-element");
-        logo.style.backgroundImage = `url(${atob(resources.logo.split(",")[1])})`;
+        logo.style.backgroundImage = `url(${resources.logo})`;
     </script>
 </body>
 </html>
